@@ -1,0 +1,24 @@
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+python-socketio==5.11.0
+python-engineio==4.9.0
+pydantic==2.5.3
+pydantic-settings==2.1.0
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.6
+filelock==3.13.1
+aiofiles==23.2.1
+
+# Windows production server (optional)
+waitress==2.1.2
+
+# Development/Testing
+pytest==7.4.3
+httpx==0.25.2
+aiohttp>=3.9.0
+
+# Reporting
+pandas==2.1.4
+openpyxl==3.1.2
+reportlab==4.0.9

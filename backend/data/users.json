@@ -1,0 +1,170 @@
+[
+  {
+    "id": "6057bc27-b4fc-43d9-867c-126a2866c0fa",
+    "email": "admin@example.com",
+    "hashed_password": "$2b$12$Xt8ZnD6cjMfepgyhKmjKzuDIik6GlVOfCEKjPmmZllSAARwg8N0je",
+    "full_name": "Super Admin",
+    "role": "super_admin",
+    "is_active": true,
+    "created_at": "2026-01-28T08:02:38.240937",
+    "updated_at": "2026-01-30T15:54:18.304012",
+    "assigned_events": [],
+    "reset_token": null,
+    "reset_token_expires": null
+  },
+  {
+    "id": "a1b2c3d4-e5f6-4a5b-9c8d-1e2f3a4b5c6d",
+    "email": "admin@eventmanager.com",
+    "hashed_password": "$2b$12$QQ94jMt5XPh.jxD1XN7.YOcGJ8eWaztOmXb.Sg/BF1TleAxh4tRX.",
+    "full_name": "Sarah Johnson",
+    "role": "super_admin",
+    "is_active": true,
+    "created_at": "2026-01-28T10:00:00.000000",
+    "updated_at": "2026-01-30T15:54:18.547994",
+    "assigned_events": [],
+    "reset_token": null,
+    "reset_token_expires": null
+  },
+  {
+    "id": "b2c3d4e5-f6a7-4b5c-9d8e-2f3a4b5c6d7e",
+    "email": "director@eventmanager.com",
+    "hashed_password": "$2b$12$f/4mRIQZLE1DwazQycewgOzR/UdhGCKAgkzimSHCej8WbJa.d1LIe",
+    "full_name": "Michael Chen",
+    "role": "super_admin",
+    "is_active": true,
+    "created_at": "2026-01-28T10:15:00.000000",
+    "updated_at": "2026-01-31T16:58:24.018027",
+    "assigned_events": [],
+    "reset_token": null,
+    "reset_token_expires": null
+  },
+  {
+    "id": "c3d4e5f6-a7b8-4c5d-9e8f-3a4b5c6d7e8f",
+    "email": "events.coordinator@eventmanager.com",
+    "hashed_password": "$2b$12$C1CZ1yT3sYB8zPYyoVJcA.bLH9Shag4jHZfIb84sN5VwlcXm8ZV3C",
+    "full_name": "Emily Rodriguez",
+    "role": "admin",
+    "is_active": true,
+    "created_at": "2026-01-28T10:30:00.000000",
+    "updated_at": "2026-01-30T15:54:18.781819",
+    "assigned_events": [],
+    "reset_token": null,
+    "reset_token_expires": null
+  },
+  {
+    "id": "d4e5f6a7-b8c9-4d5e-9f8a-4b5c6d7e8f9a",
+    "email": "venue.manager@eventmanager.com",
+    "hashed_password": "$2b$12$1wtzToPKikfmmVNKE3.hq.p.KcPik5HCkXxoLqMrV324mVkIsLrIS",
+    "full_name": "James Patterson",
+    "role": "admin",
+    "is_active": true,
+    "created_at": "2026-01-28T10:45:00.000000",
+    "updated_at": "2026-01-30T15:54:19.446041",
+    "assigned_events": [],
+    "reset_token": null,
+    "reset_token_expires": null
+  },
+  {
+    "id": "e5f6a7b8-c9d0-4e5f-9a8b-5c6d7e8f9a0b",
+    "email": "alex.thompson@eventmanager.com",
+    "hashed_password": "$2b$12$csRM47sX2AEg8J0kmsCFPeE.gcrb7tbhpwZDyFeDcYvX3NipZk.hC",
+    "full_name": "Alex Thompson",
+    "role": "staff",
+    "is_active": true,
+    "created_at": "2026-01-28T11:00:00.000000",
+    "updated_at": "2026-01-31T15:33:47.875994",
+    "assigned_events": [
+      "EV4AFDA155",
+      "EV95A5F24F",
+      "EV34540F11"
+    ],
+    "reset_token": null,
+    "reset_token_expires": null
+  },
+  {
+    "id": "f6a7b8c9-d0e1-4f5a-9b8c-6d7e8f9a0b1c",
+    "email": "registration.desk1@eventmanager.com",
+    "hashed_password": "$2b$12$sDEPqbWAB14vr.s9k.vXseSzDzFAVY6tl5khFFCSPn1PR/rTXT.v2",
+    "full_name": "Jessica Martinez",
+    "role": "staff",
+    "is_active": true,
+    "created_at": "2026-01-28T11:15:00.000000",
+    "updated_at": "2026-01-31T07:13:01.042852",
+    "assigned_events": [
+      "EV34540F11",
+      "EV95A5F24F",
+      "EV4AFDA155",
+      "EV001",
+      "EV002"
+    ],
+    "reset_token": null,
+    "reset_token_expires": null
+  },
+  {
+    "id": "a7b8c9d0-e1f2-4a5b-9c8d-7e8f9a0b1c2d",
+    "email": "registration.desk2@eventmanager.com",
+    "hashed_password": "$2b$12$tHPKiMIwO47cuis2.um4P.n0BGs2aZdqrEIOwuOLcPc/VT.hOEvxy",
+    "full_name": "David Kim",
+    "role": "staff",
+    "is_active": true,
+    "created_at": "2026-01-28T11:30:00.000000",
+    "updated_at": "2026-01-31T07:07:09.026885",
+    "assigned_events": [
+      "EV34540F11",
+      "EV95A5F24F",
+      "EV4AFDA155",
+      "EV001",
+      "EV002"
+    ],
+    "reset_token": null,
+    "reset_token_expires": null
+  },
+  {
+    "id": "b8c9d0e1-f2a3-4b5c-9d8e-8f9a0b1c2d3e",
+    "email": "entrance.staff@eventmanager.com",
+    "hashed_password": "$2b$12$tZcO8aSW12FP0XyjRD3vheyqyn7Bno7yKw85Pw9URPYMA7kk/74BS",
+    "full_name": "Amanda Foster",
+    "role": "staff",
+    "is_active": true,
+    "created_at": "2026-01-28T11:45:00.000000",
+    "updated_at": "2026-01-31T17:40:22.248522",
+    "assigned_events": [
+      "EV4AFDA155",
+      "EV001",
+      "EV95A5F24F"
+    ],
+    "reset_token": null,
+    "reset_token_expires": null
+  },
+  {
+    "id": "c9d0e1f2-a3b4-4c5d-9e8f-9a0b1c2d3e4f",
+    "email": "checkin.lead@eventmanager.com",
+    "hashed_password": "$2b$12$GeP2fKBV1hQlrjT1CIMOE.hITwSxAHadS.KUerq6zR24n.L0nhFHu",
+    "full_name": "Robert Taylor",
+    "role": "staff",
+    "is_active": true,
+    "created_at": "2026-01-28T12:00:00.000000",
+    "updated_at": "2026-01-31T17:40:21.105989",
+    "assigned_events": [
+      "EV003",
+      "EV4AFDA155",
+      "EV002",
+      "EV95A5F24F"
+    ],
+    "reset_token": null,
+    "reset_token_expires": null
+  },
+  {
+    "email": "pete@eventmanager.com",
+    "full_name": "Pete Martini",
+    "role": "staff",
+    "hashed_password": "$2b$12$Zp6hhA3PwaXajiRW8Ahu2enPQj2Fx939fRqTdP2nJCKmGYX41T.fy",
+    "is_active": true,
+    "assigned_events": [
+      "EV4AFDA155"
+    ],
+    "id": "5f3fef14-b531-4214-af11-d7ebb57ca3ce",
+    "created_at": "2026-01-31T16:59:59.451980",
+    "updated_at": "2026-01-31T17:40:23.135578"
+  }
+]

@@ -1,0 +1,665 @@
+[
+  {
+    "shape": "round",
+    "position": {
+      "x": 560.0,
+      "y": 940.0
+    },
+    "rotation": 45.0,
+    "seats": [
+      {
+        "id": "79a18097-e3bc-4ffa-b1dc-b6b6217bcea2",
+        "position": {
+          "x": 60.0,
+          "y": 0.0
+        },
+        "rotation": 0.0,
+        "guest_id": "b1d460b8-bb00-4671-a288-c2460972b86e",
+        "status": "assigned"
+      },
+      {
+        "id": "6c92179d-2042-4d2e-9ca0-c0eda28586a8",
+        "position": {
+          "x": 3.67394039744206e-15,
+          "y": 60.0
+        },
+        "rotation": 90.0,
+        "guest_id": "4416769d-d532-4e1b-b69a-996ab84bfeab",
+        "status": "assigned"
+      },
+      {
+        "id": "baefc132-3b9d-40b9-9a05-4b3e8f3f0aa8",
+        "position": {
+          "x": -60.0,
+          "y": 7.34788079488412e-15
+        },
+        "rotation": 180.0,
+        "guest_id": "7c1904e9-0f98-4f38-852f-d686b3cbf291",
+        "status": "assigned"
+      },
+      {
+        "id": "e9b5d646-5e3e-4acc-84df-cd87b6b5079f",
+        "position": {
+          "x": -1.1021821192326178e-14,
+          "y": -60.0
+        },
+        "rotation": 270.0,
+        "guest_id": "8eb38334-f5c5-4cfd-aa0e-88f719b9a40b",
+        "status": "assigned"
+      }
+    ],
+    "id": "b13a5cbe-e738-4683-b380-412a3d3e3937",
+    "width": 60.0,
+    "height": 100.0
+  },
+  {
+    "shape": "round",
+    "position": {
+      "x": 700.0,
+      "y": 940.0
+    },
+    "rotation": 45.0,
+    "seats": [
+      {
+        "id": "5841cf8e-a882-4b29-8d98-c7f7d8f7d083",
+        "position": {
+          "x": 60.0,
+          "y": 0.0
+        },
+        "rotation": 0.0,
+        "guest_id": "94d8d687-50df-49a0-8144-ffc05db38128",
+        "status": "assigned"
+      },
+      {
+        "id": "18e447cb-1a45-4f92-8b85-7a4aa5f6e250",
+        "position": {
+          "x": 3.67394039744206e-15,
+          "y": 60.0
+        },
+        "rotation": 90.0,
+        "guest_id": "03187a88-05b8-45ce-952e-0989463ea566",
+        "status": "assigned"
+      },
+      {
+        "id": "db12e566-e6a2-46fc-9468-b8070fd782eb",
+        "position": {
+          "x": -60.0,
+          "y": 7.34788079488412e-15
+        },
+        "rotation": 180.0,
+        "guest_id": "9dc57eaa-b317-4d5c-a35a-47e9ef88d3a3",
+        "status": "assigned"
+      },
+      {
+        "id": "a5356cde-d048-4dba-a3e7-d08378eeddcd",
+        "position": {
+          "x": -1.1021821192326178e-14,
+          "y": -60.0
+        },
+        "rotation": 270.0,
+        "guest_id": "aa630ce5-c3ae-4666-9d13-192955fd3cb2",
+        "status": "assigned"
+      }
+    ],
+    "id": "08378eb6-22d2-4605-bd05-23122730e898",
+    "width": 60.0,
+    "height": 100.0
+  },
+  {
+    "shape": "round",
+    "position": {
+      "x": 840.0,
+      "y": 940.0
+    },
+    "rotation": 45.0,
+    "seats": [
+      {
+        "id": "f3e0397e-fda0-45ac-bae4-08024591a1a2",
+        "position": {
+          "x": 60.0,
+          "y": 0.0
+        },
+        "rotation": 0.0,
+        "guest_id": "fe0e72b1-dfc4-4d2b-9792-52769d1f3ecc",
+        "status": "assigned"
+      },
+      {
+        "id": "8901f488-b2de-4382-a93c-2553fed74be5",
+        "position": {
+          "x": 3.67394039744206e-15,
+          "y": 60.0
+        },
+        "rotation": 90.0,
+        "guest_id": "5a074ba0-815e-4ad8-8615-750a3092a3a7",
+        "status": "assigned"
+      },
+      {
+        "id": "4d181a72-850d-4ad7-bc22-6fb249d4ebe3",
+        "position": {
+          "x": -60.0,
+          "y": 7.34788079488412e-15
+        },
+        "rotation": 180.0,
+        "guest_id": "317e4a54-f5eb-4075-8f1b-41abd462f9f4",
+        "status": "assigned"
+      },
+      {
+        "id": "1ebe62bf-29bf-4c48-a00b-31cbb9618c63",
+        "position": {
+          "x": -1.1021821192326178e-14,
+          "y": -60.0
+        },
+        "rotation": 270.0,
+        "guest_id": "41cd8d2e-d8e2-43b8-b4ef-1e55575bacce",
+        "status": "assigned"
+      }
+    ],
+    "id": "3f13cf37-bf1a-49bc-85c2-417ea9020061",
+    "width": 60.0,
+    "height": 100.0
+  },
+  {
+    "shape": "round",
+    "position": {
+      "x": 560.0,
+      "y": 800.0
+    },
+    "rotation": 45.0,
+    "seats": [
+      {
+        "id": "08d698b7-71d4-4c2b-b57e-801b4545bc32",
+        "position": {
+          "x": 60.0,
+          "y": 0.0
+        },
+        "rotation": 0.0,
+        "guest_id": "30b49815-65fa-493f-8cbc-9e7a041ac623",
+        "status": "assigned"
+      },
+      {
+        "id": "bf318966-0834-4bd5-8e3b-2a2ae6904ab4",
+        "position": {
+          "x": 3.67394039744206e-15,
+          "y": 60.0
+        },
+        "rotation": 90.0,
+        "guest_id": "403fe059-4dc2-46b9-b9f3-44fb5a3935a7",
+        "status": "assigned"
+      },
+      {
+        "id": "ef20fff2-5fc6-4ade-9eab-eefdc1c0153d",
+        "position": {
+          "x": -60.0,
+          "y": 7.34788079488412e-15
+        },
+        "rotation": 180.0,
+        "guest_id": "c6572741-95f3-4292-9181-8578332c6fae",
+        "status": "assigned"
+      },
+      {
+        "id": "e47133f7-d5f7-4b61-98aa-1d39b96563f4",
+        "position": {
+          "x": -1.1021821192326178e-14,
+          "y": -60.0
+        },
+        "rotation": 270.0,
+        "guest_id": "948747d1-6b3c-42ca-a4be-cfc5227b7341",
+        "status": "assigned"
+      }
+    ],
+    "id": "de117df2-400f-4018-8c84-3a48623fec08",
+    "width": 60.0,
+    "height": 100.0
+  },
+  {
+    "shape": "round",
+    "position": {
+      "x": 700.0,
+      "y": 800.0
+    },
+    "rotation": 45.0,
+    "seats": [
+      {
+        "id": "12cb0498-c046-4860-9734-1a833541335e",
+        "position": {
+          "x": 60.0,
+          "y": 0.0
+        },
+        "rotation": 0.0,
+        "guest_id": "6ae3aa12-3562-4ef6-9734-6ca131f89304",
+        "status": "assigned"
+      },
+      {
+        "id": "02a20606-be74-4a57-9fc2-46dab7d74fb6",
+        "position": {
+          "x": 3.67394039744206e-15,
+          "y": 60.0
+        },
+        "rotation": 90.0,
+        "guest_id": "17e59ad9-924b-4932-aac5-0bec5d58c67c",
+        "status": "assigned"
+      },
+      {
+        "id": "67675317-f1e7-4740-8ee8-5b3d266f04c7",
+        "position": {
+          "x": -60.0,
+          "y": 7.34788079488412e-15
+        },
+        "rotation": 180.0,
+        "guest_id": "67110ade-5a1c-4544-bbd6-7e799d031c44",
+        "status": "assigned"
+      },
+      {
+        "id": "5ae5da1e-aeb6-4e8b-aa1a-07a609883cc7",
+        "position": {
+          "x": -1.1021821192326178e-14,
+          "y": -60.0
+        },
+        "rotation": 270.0,
+        "guest_id": "8c9433e8-e916-473f-b2f6-c6e33b622f79",
+        "status": "assigned"
+      }
+    ],
+    "id": "7b3f2972-1abb-436b-97a5-ec04b521a2d4",
+    "width": 60.0,
+    "height": 100.0
+  },
+  {
+    "shape": "round",
+    "position": {
+      "x": 840.0,
+      "y": 800.0
+    },
+    "rotation": 45.0,
+    "seats": [
+      {
+        "id": "b6707556-ddc3-4a33-b13e-de0fe2b10491",
+        "position": {
+          "x": 60.0,
+          "y": 0.0
+        },
+        "rotation": 0.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "b85a7911-86b6-4ea9-8b65-642543a6f1d1",
+        "position": {
+          "x": 3.67394039744206e-15,
+          "y": 60.0
+        },
+        "rotation": 90.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "4a555e02-2765-4de2-b520-2e8256228544",
+        "position": {
+          "x": -60.0,
+          "y": 7.34788079488412e-15
+        },
+        "rotation": 180.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "c24bbf00-6714-416d-bbd2-69cbfa3805ed",
+        "position": {
+          "x": -1.1021821192326178e-14,
+          "y": -60.0
+        },
+        "rotation": 270.0,
+        "guest_id": null,
+        "status": "unassigned"
+      }
+    ],
+    "id": "9f0f7fe5-89c3-48fd-a8f5-019e1d8d6865",
+    "width": 60.0,
+    "height": 100.0
+  },
+  {
+    "shape": "round",
+    "position": {
+      "x": 560.0,
+      "y": 660.0
+    },
+    "rotation": 45.0,
+    "seats": [
+      {
+        "id": "9609d568-a8c7-4aa4-95c2-bf23d5f9ca87",
+        "position": {
+          "x": 60.0,
+          "y": 0.0
+        },
+        "rotation": 0.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "47742378-c1c1-4b72-9ad3-c3a2cae43235",
+        "position": {
+          "x": 3.67394039744206e-15,
+          "y": 60.0
+        },
+        "rotation": 90.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "434c2e6d-6d79-4ccf-bd2a-c721844abf07",
+        "position": {
+          "x": -60.0,
+          "y": 7.34788079488412e-15
+        },
+        "rotation": 180.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "3434ada0-578b-4735-a8e2-bcc6ae83051c",
+        "position": {
+          "x": -1.1021821192326178e-14,
+          "y": -60.0
+        },
+        "rotation": 270.0,
+        "guest_id": null,
+        "status": "unassigned"
+      }
+    ],
+    "id": "ccdee5ab-1756-496c-baef-1ab614562535",
+    "width": 60.0,
+    "height": 100.0
+  },
+  {
+    "shape": "rectangular",
+    "position": {
+      "x": 800.0,
+      "y": 480.0
+    },
+    "rotation": 45.0,
+    "seats": [
+      {
+        "id": "f2c31006-a8bc-4fac-bf5e-7089ac75de7d",
+        "position": {
+          "x": -20.0,
+          "y": -90.0
+        },
+        "rotation": 0.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "6d353c3d-a37e-4cf4-bddf-bee5dd51c3e5",
+        "position": {
+          "x": 20.0,
+          "y": -90.0
+        },
+        "rotation": 0.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "a1e8976c-dd09-446f-a29a-62ba561f26b3",
+        "position": {
+          "x": 90.0,
+          "y": -20.0
+        },
+        "rotation": 90.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "e3a0fba4-4601-40e8-b025-c1f9ab39b35f",
+        "position": {
+          "x": 90.0,
+          "y": 20.0
+        },
+        "rotation": 90.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "23c03ace-3802-4e8b-a6ca-8360c0ba6ac1",
+        "position": {
+          "x": 20.0,
+          "y": 90.0
+        },
+        "rotation": 180.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "895b97a1-23d2-4b41-9e13-5d05100474af",
+        "position": {
+          "x": -20.0,
+          "y": 90.0
+        },
+        "rotation": 180.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "f6d375e8-0aa7-4cad-9aba-ac13f5956256",
+        "position": {
+          "x": -90.0,
+          "y": 20.0
+        },
+        "rotation": 270.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "42e3a223-adf3-49e4-9083-6df009de5998",
+        "position": {
+          "x": -90.0,
+          "y": -20.0
+        },
+        "rotation": 270.0,
+        "guest_id": null,
+        "status": "unassigned"
+      }
+    ],
+    "id": "68f8a098-72ba-4b3d-94f8-19e92486bc41",
+    "width": 120.0,
+    "height": 120.0
+  },
+  {
+    "shape": "rectangular",
+    "position": {
+      "x": 600.0,
+      "y": 480.0
+    },
+    "rotation": 45.0,
+    "seats": [
+      {
+        "id": "d62ff20f-f6dd-43a8-8832-060943ed0534",
+        "position": {
+          "x": -20.0,
+          "y": -90.0
+        },
+        "rotation": 0.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "4b5e225f-1f48-4949-aab1-8ff8c9891b7c",
+        "position": {
+          "x": 20.0,
+          "y": -90.0
+        },
+        "rotation": 0.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "3de35a59-703d-48eb-8790-5904c68fdbf0",
+        "position": {
+          "x": 90.0,
+          "y": -20.0
+        },
+        "rotation": 90.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "ea1c87c7-d5d0-408f-9e09-e85c4d743b2f",
+        "position": {
+          "x": 90.0,
+          "y": 20.0
+        },
+        "rotation": 90.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "c7b2e681-7b0f-47fe-b4bb-345ca1562c87",
+        "position": {
+          "x": 20.0,
+          "y": 90.0
+        },
+        "rotation": 180.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "3ad50b0a-2be3-41e4-ab07-1b67b9c8e5a7",
+        "position": {
+          "x": -20.0,
+          "y": 90.0
+        },
+        "rotation": 180.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "02b97363-8e2a-4ce1-baae-2032e45e0c27",
+        "position": {
+          "x": -90.0,
+          "y": 20.0
+        },
+        "rotation": 270.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "25539ad1-b474-4d87-8cd2-103581646476",
+        "position": {
+          "x": -90.0,
+          "y": -20.0
+        },
+        "rotation": 270.0,
+        "guest_id": null,
+        "status": "unassigned"
+      }
+    ],
+    "id": "8196a1f9-e28d-45e6-9e59-51b297e3d558",
+    "width": 120.0,
+    "height": 120.0
+  },
+  {
+    "shape": "round",
+    "position": {
+      "x": 700.0,
+      "y": 660.0
+    },
+    "rotation": 45.0,
+    "seats": [
+      {
+        "id": "491c7213-2467-433e-852f-b01bf7b44b8c",
+        "position": {
+          "x": 60.0,
+          "y": 0.0
+        },
+        "rotation": 0.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "ba713cf7-2ea1-408c-a122-37d648baddfe",
+        "position": {
+          "x": 3.67394039744206e-15,
+          "y": 60.0
+        },
+        "rotation": 90.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "54b039c4-63bc-489d-926d-a51f9cceb4e0",
+        "position": {
+          "x": -60.0,
+          "y": 7.34788079488412e-15
+        },
+        "rotation": 180.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "888e943a-c05c-4189-84ce-af49c21c2958",
+        "position": {
+          "x": -1.1021821192326178e-14,
+          "y": -60.0
+        },
+        "rotation": 270.0,
+        "guest_id": null,
+        "status": "unassigned"
+      }
+    ],
+    "id": "4756a220-3296-49f7-bc39-9e3ed3c49c5e",
+    "width": 60.0,
+    "height": 100.0
+  },
+  {
+    "shape": "round",
+    "position": {
+      "x": 840.0,
+      "y": 660.0
+    },
+    "rotation": 45.0,
+    "seats": [
+      {
+        "id": "7403e04d-7a7f-47b8-863d-66aeeacd3916",
+        "position": {
+          "x": 60.0,
+          "y": 0.0
+        },
+        "rotation": 0.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "8596d496-8352-49b6-8f32-34353b8c684d",
+        "position": {
+          "x": 3.67394039744206e-15,
+          "y": 60.0
+        },
+        "rotation": 90.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "152d1ccc-3652-4f13-9884-3740a239976c",
+        "position": {
+          "x": -60.0,
+          "y": 7.34788079488412e-15
+        },
+        "rotation": 180.0,
+        "guest_id": null,
+        "status": "unassigned"
+      },
+      {
+        "id": "e99aa6bd-2775-4849-929e-f65b4d0fb9b6",
+        "position": {
+          "x": -1.1021821192326178e-14,
+          "y": -60.0
+        },
+        "rotation": 270.0,
+        "guest_id": null,
+        "status": "unassigned"
+      }
+    ],
+    "id": "a9439280-aacb-4ac4-a9f0-e2f293f1928b",
+    "width": 60.0,
+    "height": 100.0
+  }
+]

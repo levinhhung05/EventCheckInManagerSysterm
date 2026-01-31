@@ -1,0 +1,9 @@
+{
+  "config": {
+    "grid_size": 20,
+    "snap_to_grid": true,
+    "canvas_width": 2000,
+    "canvas_height": 1500,
+    "show_grid": true
+  }
+}

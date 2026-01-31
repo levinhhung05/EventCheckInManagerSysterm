@@ -1,0 +1,13 @@
+[
+  {
+    "id": "95dd5e39-1dcf-482e-b588-af1c47391d1f",
+    "email": "admin@example.com",
+    "hashed_password": "$2b$12$1G6N0zSURp0SfE3GYG8Yz.hw01WBZ8bzh2GZNCZDF1ygD0t9EinrO",
+    "full_name": "Super Admin",
+    "role": "super_admin",
+    "is_active": true,
+    "created_at": "2026-01-31T18:11:45.870017",
+    "updated_at": "2026-01-31T18:11:45.870017",
+    "assigned_events": []
+  }
+]
