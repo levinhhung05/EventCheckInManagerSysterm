@@ -51,5 +51,4 @@ npm run dev -- --host
 ```
 /backend/    → Python API server
 /frontend/   → React application
-/data/       → Event data and user storage
 ```
