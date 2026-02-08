@@ -460,6 +460,7 @@ async def assign_guest_to_seat(
             "guest_id": assignment.guest_id,
             "table_id": assignment.table_id,
             "seat_id": assignment.seat_id,
+            "guest": guest,
             "assigned_by": current_user.id,
             "timestamp": datetime.utcnow().isoformat()
         },

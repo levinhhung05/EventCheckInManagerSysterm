@@ -1,0 +1,53 @@
+[
+  {
+    "full_name": "Lê Vĩnh Hưng",
+    "phone": "+84395241240",
+    "company": "",
+    "email": "levinhhung05102002@gmail.com",
+    "notes": "",
+    "table_id": "a2e811ff-ce8c-4b82-9708-c7ec5b913f47",
+    "seat_id": "6f534b64-185b-46d3-b006-513b4ba46666",
+    "checked_in": true,
+    "checked_in_at": "2026-02-08T15:41:36.298045",
+    "checked_in_by": "a7b8c9d0-e1f2-4a5b-9c8d-7e8f9a0b1c2d",
+    "id": "e5260ef8-f9de-464a-8311-97728020c08c",
+    "event_id": "EVCBBAE789",
+    "created_at": "2026-02-07T16:01:50.415832",
+    "updated_at": "2026-02-08T15:41:36.298045",
+    "checked_out_at": "2026-02-07T16:18:04.294288"
+  },
+  {
+    "full_name": "John Doe",
+    "phone": "+1234567890",
+    "company": "",
+    "email": "johndoe@company.com",
+    "notes": "",
+    "table_id": "4c7b1d85-ae66-4661-9abd-2eba86b2e69d",
+    "seat_id": "c486d63c-a0ea-429e-8254-ca01e65ce0e6",
+    "checked_in": true,
+    "checked_in_at": "2026-02-08T22:38:53.929074",
+    "checked_in_by": "b8c9d0e1-f2a3-4b5c-9d8e-8f9a0b1c2d3e",
+    "id": "372cb80d-5d7c-42ef-8ab2-3f578313425f",
+    "event_id": "EVCBBAE789",
+    "created_at": "2026-02-07T16:02:20.382755",
+    "updated_at": "2026-02-08T22:38:53.929074",
+    "checked_out_at": "2026-02-08T16:28:01.775235"
+  },
+  {
+    "full_name": "Peter",
+    "phone": "+0987654321",
+    "company": "Stock Company",
+    "email": "peter1@stockcompany.com",
+    "notes": "",
+    "table_id": "901a3a3c-ba13-45b1-a269-dce714440023",
+    "seat_id": "a98670b7-2028-4084-aaef-eaec922a8717",
+    "checked_in": true,
+    "checked_in_at": "2026-02-08T22:39:16.207780",
+    "checked_in_by": "b8c9d0e1-f2a3-4b5c-9d8e-8f9a0b1c2d3e",
+    "id": "75030e69-4b19-42da-a7aa-3edb71d37295",
+    "event_id": "EVCBBAE789",
+    "created_at": "2026-02-07T16:03:21.323981",
+    "updated_at": "2026-02-08T22:39:16.207780",
+    "checked_out_at": "2026-02-08T20:12:06.098078"
+  }
+]

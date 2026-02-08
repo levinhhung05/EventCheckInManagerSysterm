@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo, memo } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Stage, Layer, Circle, Rect, Group, Text as KonvaText } from 'react-konva'
@@ -31,14 +31,27 @@ import {
   StatLabel,
   StatNumber,
   SimpleGrid,
+  useBreakpointValue,
 } from '@chakra-ui/react'
 import { FiSearch, FiArrowLeft, FiCheck, FiX, FiLogOut } from 'react-icons/fi'
 import toast from 'react-hot-toast'
 import { layoutAPI, guestsAPI, reportsAPI } from '../../services/api'
 import { useSocket } from '../../hooks/useSocket'
 
-// Seat Component with click handler
-const SeatShape = ({ seat, table, guest, onClick }) => {
+// Canvas dimensions - ALWAYS 2000x1500 to preserve table positions
+// We adjust SCALE instead to fit different screen sizes
+const CANVAS_WIDTH = 2000
+const CANVAS_HEIGHT = 1500
+
+// Calculate appropriate scale based on device viewport
+const getInitialScale = (isMobile, isTablet) => {
+  if (isMobile) return 0.25   // 2000 * 0.25 = 500px wide (fits mobile screen)
+  if (isTablet) return 0.35    // 2000 * 0.35 = 700px wide
+  return 0.5                   // 2000 * 0.5 = 1000px wide (desktop)
+}
+
+// Seat Component with click handler - optimized for mobile
+const SeatShape = memo(({ seat, table, guest, onClick, isMobile }) => {
   const getColor = () => {
     if (!guest) return '#cbd5e0' // Gray - unassigned
     if (guest.checked_in) return '#48bb78' // Green - checked in
@@ -57,94 +70,146 @@ const SeatShape = ({ seat, table, guest, onClick }) => {
         radius={30}
         fill="transparent"
       />
-      {/* Visible Seat */}
+      {/* Visible Seat - shadow disabled on mobile for performance */}
       <Circle
         radius={14}
         fill={getColor()}
         stroke="#ffffff"
         strokeWidth={2}
-        shadowBlur={guest ? 5 : 0}
+        shadowBlur={!isMobile && guest ? 5 : 0}
         shadowColor="black"
         shadowOpacity={0.3}
       />
     </Group>
   )
-}
+})
 
-// Table Component for display
-const TableDisplay = ({ table, guests, onSeatClick }) => {
-  return (
-    <Group
-      x={table.position.x}
-      y={table.position.y}
-      rotation={table.rotation}
-    >
-      {/* Table shape */}
-      {table.shape === 'round' ? (
-        <Circle
-          radius={table.width / 2}
-          fill="#bee3f8"
-          stroke="#2b6cb0"
-          strokeWidth={2}
-        />
-      ) : (
-        <Rect
-          width={table.width}
-          height={table.height}
-          offsetX={table.width / 2}
-          offsetY={table.height / 2}
-          fill="#bee3f8"
-          stroke="#2b6cb0"
-          strokeWidth={2}
-          cornerRadius={8}
-        />
-      )}
-
-      {/* Table label */}
-      <KonvaText
-        text={`T${table.id.slice(-4)}`}
-        fontSize={16}
-        fontStyle="bold"
-        fill="#2c5282"
-        align="center"
-        verticalAlign="middle"
-        width={table.width}
-        offsetX={table.width / 2}
-        offsetY={8}
-      />
-
-      {/* Seats */}
-      {table.seats.map((seat) => {
-        const guest = guests?.find(g => g.id === seat.guest_id)
-        return (
-          <SeatShape
-            key={seat.id}
-            seat={seat}
-            table={table}
-            guest={guest}
-            onClick={onSeatClick}
+  // Table Component for display - memoized for performance
+  const TableDisplay = memo(({ table, guestsMap, onSeatClick, isMobile }) => {
+    return (
+      <Group
+        x={table.position.x}
+        y={table.position.y}
+        rotation={table.rotation}
+      >
+        {/* Table shape */}
+        {table.shape === 'round' ? (
+          <Circle
+            radius={table.width / 2}
+            fill="#bee3f8"
+            stroke="#2b6cb0"
+            strokeWidth={2}
           />
-        )
-      })}
-    </Group>
-  )
-}
+        ) : (
+          <Rect
+            width={table.width}
+            height={table.height}
+            offsetX={table.width / 2}
+            offsetY={table.height / 2}
+            fill="#bee3f8"
+            stroke="#2b6cb0"
+            strokeWidth={2}
+            cornerRadius={8}
+          />
+        )}
+  
+        {/* Table label */}
+        <KonvaText
+          text={`T${table.id.slice(-4)}`}
+          fontSize={16}
+          fontStyle="bold"
+          fill="#2c5282"
+          align="center"
+          verticalAlign="middle"
+          width={table.width}
+          offsetX={table.width / 2}
+          offsetY={8}
+        />
+  
+        {/* Seats */}
+        {table.seats.map((seat) => {
+          // O(1) lookup instead of O(N) find
+          const guest = seat.guest_id ? guestsMap.get(seat.guest_id) : null
+          return (
+            <SeatShape
+              key={seat.id}
+              seat={seat}
+              table={table}
+              guest={guest}
+              onClick={onSeatClick}
+              isMobile={isMobile}
+            />
+          )
+        })}
+      </Group>
+    )
+  }, (prevProps, nextProps) => {
+    // Custom comparison for memoization
+    // Only re-render if:
+    // 1. Table structure changed (position, rotation, etc)
+    // 2. isMobile changed
+    // 3. Guests associated with THIS table changed
+    
+    if (prevProps.table !== nextProps.table) return false
+    if (prevProps.isMobile !== nextProps.isMobile) return false
+    
+    // Check if any guest on this table changed status
+    const prevSeats = prevProps.table.seats
+    const nextSeats = nextProps.table.seats
+    
+    // If seat structure changed
+    if (prevSeats.length !== nextSeats.length) return false
+    
+    // Check each seat's guest status
+    for (let i = 0; i < nextSeats.length; i++) {
+      const seat = nextSeats[i]
+      const guestId = seat.guest_id
+      
+      // If guest assignment changed
+      if (prevSeats[i].guest_id !== guestId) return false
+      
+      if (guestId) {
+        const prevGuest = prevProps.guestsMap.get(guestId)
+        const nextGuest = nextProps.guestsMap.get(guestId)
+        
+        // If guest data changed (checked_in status, etc)
+        if (prevGuest !== nextGuest) return false
+      }
+    }
+    
+    return true // No relevant changes, skip re-render
+  })
 
 export default function CheckInView() {
   const { eventId } = useParams()
   const navigate = useNavigate()
   const queryClient = useQueryClient()
   const socket = useSocket(eventId)
-  
+
+  // Responsive breakpoints
+  const isMobile = useBreakpointValue({ base: true, lg: false })
+  const isTablet = useBreakpointValue({ base: false, md: true, lg: false })
+
+  // Calculate initial scale based on device - canvas always 2000x1500
+  const initialScale = useMemo(() =>
+    getInitialScale(isMobile, isTablet),
+    [isMobile, isTablet]
+  )
+
   const [search, setSearch] = useState('')
   const [selectedGuest, setSelectedGuest] = useState(null)
-  const [scale, setScale] = useState(0.4)
+  const [scale, setScale] = useState(initialScale)
   const [stagePos, setStagePos] = useState({ x: 0, y: 0 })
   const stageRef = useRef(null)
   const { isOpen, onOpen, onClose } = useDisclosure()
 
+  // Update scale when device changes
+  useEffect(() => {
+    setScale(initialScale)
+  }, [initialScale])
+
   const handleResetView = () => {
-    setScale(0.4)
+    setScale(initialScale)
     setStagePos({ x: 0, y: 0 })
     if (stageRef.current) {
       stageRef.current.position({ x: 0, y: 0 })
@@ -170,6 +235,15 @@ export default function CheckInView() {
       return response.data
     },
   })
+
+  // Create a fast lookup map for guests
+  const guestsMap = useMemo(() => {
+    const map = new Map()
+    guests.forEach(g => {
+      map.set(g.id, g)
+    })
+    return map
+  }, [guests])
 
   // Fetch summary stats
   const { data: summary, refetch: refetchSummary } = useQuery({
@@ -239,8 +313,130 @@ export default function CheckInView() {
       })
 
     socket.on('seat_unassigned', (data) => {
-      console.log('Seat unassigned:', data)
+      console.log('Seat unassigned event received:', data)
+      
+      // Optimistic update for guests list
+      queryClient.setQueriesData({ queryKey: ['guests', eventId] }, (oldGuests) => {
+        if (!oldGuests) return oldGuests
+        return oldGuests.map(g => 
+          g.id === data.guest_id ? { ...g, table_id: null, seat_id: null } : g
+        )
+      })
+
+      // Optimistic update for layout
+      queryClient.setQueriesData({ queryKey: ['layout', eventId] }, (oldLayout) => {
+        if (!oldLayout || !oldLayout.tables) return oldLayout
+        
+        const newTables = oldLayout.tables.map(table => {
+          // Loose comparison for IDs to handle string/number mismatch
+          if (String(table.id) !== String(data.table_id)) return table
+          
+          return {
+            ...table,
+            seats: table.seats.map(seat => {
+              if (String(seat.id) !== String(data.seat_id)) return seat
+              return { ...seat, guest_id: null, status: 'unassigned' }
+            })
+          }
+        })
+        
+        return { ...oldLayout, tables: newTables }
+      })
+
+      // Force refresh to ensure data consistency
+      refetchSummary()
       refetchGuests()
+      queryClient.invalidateQueries(['layout', eventId])
+    })
+
+    socket.on('seat_assigned', (data) => {
+      console.log('Seat assigned event received:', data)
+      
+      const guestId = String(data.guest_id)
+      const tableId = String(data.table_id)
+      const seatId = String(data.seat_id)
+
+      // Optimistic update for guests list
+      // We use the full guest object from server if available, to ensure we have latest data
+      // and to handle cases where guest might not be in the current list (search filter/pagination)
+      queryClient.setQueriesData({ queryKey: ['guests', eventId] }, (oldGuests) => {
+        if (!oldGuests) return data.guest ? [data.guest] : []
+        
+        // If we have the full guest object, we can upsert
+        if (data.guest) {
+          const exists = oldGuests.some(g => String(g.id) === guestId)
+          if (exists) {
+             return oldGuests.map(g => String(g.id) === guestId ? { ...g, ...data.guest, table_id: data.table_id, seat_id: data.seat_id } : g)
+          } else {
+             // Add to list if not present (so it shows up in map and seat gets colored)
+             // Only add if it matches current search filter? 
+             // Ideally we just add it, table display will use it. Search list might show it, which is fine.
+             return [...oldGuests, { ...data.guest, table_id: data.table_id, seat_id: data.seat_id }]
+          }
+        }
+        
+        // Fallback if no guest object (legacy)
+        return oldGuests.map(g => 
+          String(g.id) === guestId ? { ...g, table_id: data.table_id, seat_id: data.seat_id } : g
+        )
+      })
+
+      // Optimistic update for layout
+      queryClient.setQueriesData({ queryKey: ['layout', eventId] }, (oldLayout) => {
+        if (!oldLayout || !oldLayout.tables) return oldLayout
+        
+        const newTables = oldLayout.tables.map(table => {
+          // If this is the table where seat is assigned
+          if (String(table.id) === tableId) {
+            return {
+              ...table,
+              seats: table.seats.map(seat => {
+                if (String(seat.id) === seatId) {
+                  return { ...seat, guest_id: guestId, status: 'assigned' }
+                }
+                // If guest was moved from another seat in same table
+                if (seat.guest_id && String(seat.guest_id) === guestId && String(seat.id) !== seatId) {
+                   return { ...seat, guest_id: null, status: 'unassigned' }
+                }
+                return seat
+              })
+            }
+          }
+          
+          // Also check other tables to remove guest from previous seat if any (cleanup)
+          const hasGuest = table.seats.some(s => s.guest_id && String(s.guest_id) === guestId)
+          if (hasGuest) {
+            return {
+              ...table,
+              seats: table.seats.map(seat => {
+                if (seat.guest_id && String(seat.guest_id) === guestId) {
+                  return { ...seat, guest_id: null, status: 'unassigned' }
+                }
+                return seat
+              })
+            }
+          }
+          
+          return table
+        })
+        
+        return { ...oldLayout, tables: newTables }
+      })
+
+      // Force refresh to ensure data consistency
+      refetchSummary()
+      refetchGuests()
+      queryClient.invalidateQueries(['layout', eventId])
+    })
+
+    socket.on('guest_updated', (data) => {
+      console.log('Guest updated:', data)
+      queryClient.setQueriesData({ queryKey: ['guests', eventId] }, (oldGuests) => {
+        if (!oldGuests) return oldGuests
+        return oldGuests.map(g => 
+          g.id === data.guest.id ? { ...g, ...data.guest } : g
+        )
+      })
       refetchSummary()
     })
 
@@ -252,9 +448,25 @@ export default function CheckInView() {
       socket.off('guest_checked_in')
       socket.off('guest_checked_out')
       socket.off('seat_unassigned')
+      socket.off('seat_assigned')
+      socket.off('guest_updated')
       socket.off('layout_changed')
     }
   }, [socket, refetchGuests, refetchSummary])
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        refetchGuests()
+        refetchSummary()
+        queryClient.invalidateQueries(['layout', eventId])
+      }
+    }
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+    }
+  }, [eventId, queryClient, refetchGuests, refetchSummary])
 
   const getTableLabel = (tableId) => {
     if (!layoutData?.tables) return tableId?.slice(-4)
@@ -495,7 +707,11 @@ export default function CheckInView() {
         {/* Layout View */}
         <Card flex={1} w="100%">
           <CardBody p={2}>
-            <Box position="relative" h={{ base: '400px', lg: 'auto' }} maxH="calc(100vh - 300px)">
+            <Box
+              position="relative"
+              h={{ base: '500px', md: '600px', lg: 'auto' }}
+              maxH={{ base: 'calc(100vh - 200px)', lg: 'calc(100vh - 300px)' }}
+            >
               <Box
                 border="2px"
                 borderColor="gray.300"
@@ -504,12 +720,25 @@ export default function CheckInView() {
                 bg="white"
                 w="100%"
                 h="100%"
+                sx={{
+                  // Smooth scrolling on mobile
+                  WebkitOverflowScrolling: 'touch',
+                  // Show scrollbars on mobile for better UX
+                  '&::-webkit-scrollbar': {
+                    width: '8px',
+                    height: '8px',
+                  },
+                  '&::-webkit-scrollbar-thumb': {
+                    background: '#CBD5E0',
+                    borderRadius: '4px',
+                  },
+                }}
               >
                 {layoutData?.tables && layoutData.tables.length > 0 ? (
                   <>
                     <Stage
-                      width={2000 * scale}
-                      height={1500 * scale}
+                      width={CANVAS_WIDTH * scale}
+                      height={CANVAS_HEIGHT * scale}
                       scaleX={scale}
                       scaleY={scale}
                       x={stagePos.x}
@@ -525,8 +754,9 @@ export default function CheckInView() {
                           <TableDisplay
                             key={table.id}
                             table={table}
-                            guests={guests}
+                            guestsMap={guestsMap}
                             onSeatClick={handleSeatClick}
+                            isMobile={isMobile}
                           />
                         ))}
                       </Layer>

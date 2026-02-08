@@ -64,68 +64,122 @@ import { layoutAPI, guestsAPI, getErrorMessage } from '../../services/api'
 import { useSocket } from '../../hooks/useSocket'
 import CanvasControls from '../shared/CanvasControls'
 
+// Canvas dimensions - ALWAYS 2000x1500 to preserve table positions
+// We adjust SCALE instead to fit different screen sizes
 const CANVAS_WIDTH = 2000
 const CANVAS_HEIGHT = 1500
 const GRID_SIZE = 20
 
-// Background Image Component
+// Calculate appropriate scale based on device viewport
+const getInitialScale = (isMobile, isTablet) => {
+  if (isMobile) return 0.3    // 2000 * 0.3 = 600px wide (fits mobile with padding)
+  if (isTablet) return 0.4     // 2000 * 0.4 = 800px wide
+  return 0.5                   // 2000 * 0.5 = 1000px wide (desktop)
+}
+
+// Background Image Component with error handling
 const BackgroundImage = ({ src, width, height }) => {
   const [image, setImage] = useState(null)
-  
+  const [error, setError] = useState(false)
+
   useEffect(() => {
     if (!src) {
       setImage(null)
+      setError(false)
       return
     }
     const img = new window.Image()
     img.src = src
-    img.onload = () => setImage(img)
+    img.onload = () => {
+      setImage(img)
+      setError(false)
+    }
+    img.onerror = () => {
+      setError(true)
+      setImage(null)
+    }
   }, [src])
 
+  if (error) return null
   if (!image) return null
-  
+
   return (
     <Group listening={false}>
       {/* Solid background to ensure visibility */}
       <Rect width={width} height={height} fill="white" />
-      <KonvaImage 
-        image={image} 
-        width={width} 
-        height={height} 
-        opacity={0.8} 
+      <KonvaImage
+        image={image}
+        width={width}
+        height={height}
+        opacity={0.8}
       />
     </Group>
   )
 }
 
-// Grid Component
-const GridLayer = React.memo(({ width, height, gridSize, showGrid }) => {
+// Grid Component with viewport culling for performance
+// Only renders grid lines that are potentially visible
+const GridLayer = React.memo(({ width, height, gridSize, showGrid, scale, stagePos }) => {
   if (!showGrid) return null
 
-  return (
-    <>
-      {Array.from({ length: Math.ceil(width / gridSize) }).map((_, i) => (
+  // Calculate visible viewport bounds
+  const visibleArea = useMemo(() => {
+    const padding = 100 // Extra padding to avoid pop-in
+    return {
+      minX: Math.max(0, -stagePos.x / scale - padding),
+      maxX: Math.min(width, (-stagePos.x + window.innerWidth) / scale + padding),
+      minY: Math.max(0, -stagePos.y / scale - padding),
+      maxY: Math.min(height, (-stagePos.y + window.innerHeight) / scale + padding),
+    }
+  }, [width, height, scale, stagePos])
+
+  // Only generate grid lines within visible viewport
+  const verticalLines = useMemo(() => {
+    const lines = []
+    const startX = Math.floor(visibleArea.minX / gridSize) * gridSize
+    const endX = Math.ceil(visibleArea.maxX / gridSize) * gridSize
+
+    for (let x = startX; x <= endX; x += gridSize) {
+      lines.push(
         <Rect
-          key={`v-${i}`}
-          x={i * gridSize}
+          key={`v-${x}`}
+          x={x}
           y={0}
           width={1}
           height={height}
           fill="#e2e8f0"
           listening={false}
         />
-      ))}
-      {Array.from({ length: Math.ceil(height / gridSize) }).map((_, i) => (
+      )
+    }
+    return lines
+  }, [visibleArea, gridSize, height])
+
+  const horizontalLines = useMemo(() => {
+    const lines = []
+    const startY = Math.floor(visibleArea.minY / gridSize) * gridSize
+    const endY = Math.ceil(visibleArea.maxY / gridSize) * gridSize
+
+    for (let y = startY; y <= endY; y += gridSize) {
+      lines.push(
         <Rect
-          key={`h-${i}`}
+          key={`h-${y}`}
           x={0}
-          y={i * gridSize}
+          y={y}
           width={width}
           height={1}
           fill="#e2e8f0"
           listening={false}
         />
-      ))}
+      )
+    }
+    return lines
+  }, [visibleArea, gridSize, width])
+
+  return (
+    <>
+      {verticalLines}
+      {horizontalLines}
     </>
   )
 })
@@ -280,7 +334,7 @@ export default function LayoutBuilder() {
   const stageRef = useRef()
   const [selectedTableId, setSelectedTableId] = useState(null)
   const [showGrid, setShowGrid] = useState(true)
-  const [scale, setScale] = useState(0.5)
+  const [scale, setScale] = useState(0.5) // Will be updated by useEffect
   const isDraggingRef = useRef(false)
   
   // New table configuration
@@ -294,12 +348,24 @@ export default function LayoutBuilder() {
   const { isOpen: isAssignOpen, onOpen: onAssignOpen, onClose: onAssignClose } = useDisclosure()
   const { isOpen: isToolsOpen, onOpen: onToolsOpen, onClose: onToolsClose } = useDisclosure()
   const isMobile = useBreakpointValue({ base: true, lg: false })
-  
+  const isTablet = useBreakpointValue({ base: false, md: true, lg: false })
+
+  // Calculate initial scale based on device - canvas always 2000x1500
+  const initialScale = useMemo(() =>
+    getInitialScale(isMobile, isTablet),
+    [isMobile, isTablet]
+  )
+
   const [selectedSeat, setSelectedSeat] = useState(null)
   const [stagePos, setStagePos] = useState({ x: 0, y: 0 })
 
+  // Initialize scale with device-appropriate value
+  useEffect(() => {
+    setScale(initialScale)
+  }, [initialScale])
+
   const handleResetView = () => {
-    setScale(0.5)
+    setScale(initialScale)
     setStagePos({ x: 0, y: 0 })
     if (stageRef.current) {
       stageRef.current.position({ x: 0, y: 0 })
@@ -963,7 +1029,7 @@ export default function LayoutBuilder() {
           <CardBody p={0} position="relative">
             <Box
               w="100%"
-              h="600px"
+              h={{ base: '400px', md: '500px', lg: '600px' }}
               overflow="hidden"
               bg="gray.50"
               position="relative"
@@ -1008,12 +1074,14 @@ export default function LayoutBuilder() {
                     <BackgroundImage src={floorPlanUrl} width={CANVAS_WIDTH} height={CANVAS_HEIGHT} />
                   )}
 
-                  {/* Grid */}
+                  {/* Grid - with viewport culling for performance */}
                   <GridLayer
                     width={CANVAS_WIDTH}
                     height={CANVAS_HEIGHT}
                     gridSize={GRID_SIZE}
                     showGrid={showGrid}
+                    scale={scale}
+                    stagePos={stagePos}
                   />
 
                   {/* Tables */}

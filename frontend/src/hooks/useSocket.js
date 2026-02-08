@@ -9,12 +9,15 @@ export const useSocket = (eventId) => {
   useEffect(() => {
     if (!eventId || !user) return
 
+    console.log(`🔄 [useSocket] Connecting to event room: ${eventId} as user: ${user.id}`)
+    
     // Connect and join event
     socketService.connect()
     socketService.joinEvent(eventId, user.id)
 
     // Cleanup
     return () => {
+      console.log(`🔄 [useSocket] Leaving event room: ${eventId}`)
       socketService.leaveEvent(eventId)
       
       // Remove all registered handlers
